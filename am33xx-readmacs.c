@@ -71,6 +71,7 @@ main ()
 
   if (map_base == MAP_FAILED) {
     perror ("failed to mmap");
+    close (devmemfd);
     return 1;
   }
 
