@@ -10,27 +10,15 @@
 #include <unistd.h>
 
 /* see u-boot <board/ti/am335x/board.c> */
-#define AM33XX_CTRL_DEVICE_BASE 0x44e10600
+#define AM335X_CTRL_DEVICE_BASE 0x44e10600
 
 /* copied from u-boot <arch/arm/include/asm/arch-am33xx/cpu.h> */
 struct ctrl_dev {
-  unsigned int deviceid;		/* offset 0x00 */
-  unsigned int resv1[7];
-  unsigned int usb_ctrl0;		/* offset 0x20 */
-  unsigned int resv2;
-  unsigned int usb_ctrl1;		/* offset 0x28 */
-  unsigned int resv3;
+  unsigned int padding[12];
   unsigned int macid0l;		/* offset 0x30 */
   unsigned int macid0h;		/* offset 0x34 */
   unsigned int macid1l;		/* offset 0x38 */
   unsigned int macid1h;		/* offset 0x3c */
-  unsigned int resv4[4];
-  unsigned int miisel;		/* offset 0x50 */
-  unsigned int resv5[7];
-  unsigned int mreqprio_0;	/* offset 0x70 */
-  unsigned int mreqprio_1;	/* offset 0x74 */
-  unsigned int resv6[97];
-  unsigned int efuse_sma;		/* offset 0x1FC */
 };
 
 int
@@ -45,7 +33,7 @@ main ()
     return 1;
   }
 
-  const off_t target = AM33XX_CTRL_DEVICE_BASE;
+  const off_t target = AM335X_CTRL_DEVICE_BASE;
 
   const unsigned offset = target & (page_size - 1);
   const bool multi_page = (offset + sizeof (struct ctrl_dev)) > page_size;
