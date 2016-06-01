@@ -9,8 +9,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#ifndef AM33XX_CTRL_DEVICE_BASE
 /* see u-boot <board/ti/am335x/board.c> */
-#define AM335X_CTRL_DEVICE_BASE 0x44e10600
+#define AM33XX_CTRL_DEVICE_BASE 0x44e10600
+#endif
 
 /* copied from u-boot <arch/arm/include/asm/arch-am33xx/cpu.h> */
 struct ctrl_dev {
@@ -33,7 +35,7 @@ main ()
     return 1;
   }
 
-  const off_t target = AM335X_CTRL_DEVICE_BASE;
+  const off_t target = AM33XX_CTRL_DEVICE_BASE;
 
   const unsigned offset = target & (page_size - 1);
   const bool multi_page = (offset + sizeof (struct ctrl_dev)) > page_size;
