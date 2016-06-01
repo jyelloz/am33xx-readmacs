@@ -24,7 +24,7 @@ struct ctrl_dev {
 };
 
 int
-main ()
+main (const int argc, const char *argv[])
 {
 
   const long page_size = sysconf (_SC_PAGESIZE);
@@ -69,9 +69,32 @@ main ()
     ((uint8_t *) map_base) + offset
   );
 
+  char mac0[13], mac1[13];
+
   /* the bytes are ordered opposite to mac address display format */
-  printf ("mac0:%08x%04x\n", htonl (dev->macid0h), htons (dev->macid0l));
-  printf ("mac1:%08x%04x\n", htonl (dev->macid1h), htons (dev->macid1l));
+  snprintf (
+    mac0,
+    sizeof (mac0),
+    "%08x%04x",
+    htonl (dev->macid0h) & 0xffffffff,
+    htonl (dev->macid0l) & 0x0000ffff
+  );
+
+  snprintf (
+    mac1,
+    sizeof (mac1),
+    "%08x%04x",
+    htonl (dev->macid1h) & 0xffffffff,
+    htonl (dev->macid1l) & 0x0000ffff
+  );
+
+  if (argc < 2) {
+    printf ("mac0:%s\n", mac0);
+    printf ("mac1:%s\n", mac1);
+  } else {
+    const char arg = argv[1][0];
+    printf ("%s\n", arg != '1' ? mac0 : mac1);
+  }
 
   munmap (map_base, mapped_size);
   close (devmemfd);
