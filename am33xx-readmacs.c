@@ -76,16 +76,16 @@ main (const int argc, const char *argv[])
     mac0,
     sizeof (mac0),
     "%08x%04x",
-    htonl (dev->macid0h) & 0xffffffff,
-    htonl (dev->macid0l) & 0x0000ffff
+    htonl (dev->macid0h),
+    htonl (dev->macid0l)
   );
 
   snprintf (
     mac1,
     sizeof (mac1),
     "%08x%04x",
-    htonl (dev->macid1h) & 0xffffffff,
-    htonl (dev->macid1l) & 0x0000ffff
+    htonl (dev->macid1h),
+    htonl (dev->macid1l)
   );
 
   if (argc < 2) {
