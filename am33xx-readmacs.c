@@ -41,7 +41,9 @@ main (const int argc, const char *argv[])
   const bool multi_page = (offset + sizeof (struct ctrl_dev)) > page_size;
   const long mapped_size = page_size << (multi_page ? 1 : 0);
 
-  printf (
+#ifdef DEBUG
+  fprintf (
+    stderr,
     "page_size=0x%04lx, "
     "offset=0x%04x, "
     "mapped_size=0x%04lx\n",
@@ -49,6 +51,7 @@ main (const int argc, const char *argv[])
     offset,
     mapped_size
   );
+#endif
 
   void *const map_base = mmap (
     NULL,
