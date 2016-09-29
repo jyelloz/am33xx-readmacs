@@ -17,7 +17,7 @@ BINDIR = $(DESTDIR)$(PREFIX)/bin
 
 PROGS = am33xx-readmacs
 
-all: $(PROGS) Makefile config.mk
+all: $(PROGS)
 
 install: $(PROGS)
 	$(INSTALL) -d $(BINDIR)
