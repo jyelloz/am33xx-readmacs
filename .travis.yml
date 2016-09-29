@@ -1,0 +1,21 @@
+language: c
+sudo: false
+os:
+  - linux
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.9
+      - clang
+
+compiler:
+  - gcc-4.9
+
+script:
+  - make
+
+notifications:
+  email: false
