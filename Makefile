@@ -1,6 +1,6 @@
 -include config.mk
 
-CFLAGS += -std=gnu11 -pedantic -Wall -Werror
+CFLAGS += -std=gnu99 -pedantic -Wall -Werror
 
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
