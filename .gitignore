@@ -33,3 +33,6 @@
 
 # build configuration makefile
 /config.mk
+
+# the binary
+am33xx-readmacs
